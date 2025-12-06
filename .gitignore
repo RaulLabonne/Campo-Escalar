@@ -1,0 +1,66 @@
+# ===========================================
+# Compilación C / C++
+# ===========================================
+*.o
+*.lo
+*.la
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+*.exe
+*.out
+*.app
+
+# ===========================================
+# Carpetas de compilación
+# ===========================================
+build/
+bin/
+debug/
+release/
+dist/
+out/
+
+# ===========================================
+# Archivos de dependencias o cache
+# ===========================================
+*.d
+*.pch
+*.idb
+*.pdb
+
+# ===========================================
+# Archivos de logs o temporales
+# ===========================================
+*.log
+*.tmp
+*.bak
+*.swp
+
+# ===========================================
+# Archivos del sistema / editor
+# ===========================================
+.DS_Store
+Thumbs.db
+
+# ===========================================
+# Configuración de IDEs (opcional)
+# ===========================================
+.vscode/
+.idea/
+*.code-workspace
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# ===========================================
+# Librerías externas locales
+# (añade aquí si tienes dependencias descargadas manualmente)
+# ===========================================
+deps/
+external/
+third_party/
+lib/
