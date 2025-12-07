@@ -25,7 +25,8 @@ namespace opengl
         m_window.initViewProyection();
 
         m_compiler = new Compiler("../shader/escalarVert.glsl", "../shader/escalarFrag.glsl");
-        m_draw = new Draw(m_compiler);
+        m_vectorCompiler = new Compiler("../shader/vectorialVert.glsl", "../shader/vectorialFrag.glsl");
+        m_draw = new Draw(m_compiler, m_vectorCompiler, m_funcion);
 
         // Inicializamos los buffers de vertices y colores
         m_draw->init();

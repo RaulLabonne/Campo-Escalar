@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include <vector>
+#include <iostream>
 #include <glm/glm.hpp>
 
 namespace opengl {
@@ -15,10 +16,11 @@ namespace opengl {
                 FUNCION_A,
                 FUNCION_B,
             };
-
+        
         Entrada(Funciones func): m_funcion(func) {}
+        
 
-        float evaluarFuncion(float x, float y, Funciones func);
+        float evaluarFuncion(float x, float y);
 
         void generarMalla(float xMin, float xMax, 
                             float yMin, float yMax, 

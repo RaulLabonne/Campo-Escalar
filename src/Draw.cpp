@@ -7,7 +7,7 @@
 
 namespace opengl {
 
-    Draw::Draw(Compiler* compiler) : m_compiler(compiler) {
+    Draw::Draw(Compiler* compiler, Compiler* vectorCompiler, Entrada::Funciones func) : m_compiler(compiler), m_vectorCompiler(vectorCompiler) {
 
         /* m_vertices = {
             //   x      y      z      u     v
@@ -22,7 +22,7 @@ namespace opengl {
             2, 3, 0
         }; */
 
-        Entrada entrada(Entrada::TRIGONOMETRICA);
+        Entrada entrada(func);
         entrada.generarMalla(-8.0f, 8.0f,
                              -8.0f, 8.0f,
                              100,
@@ -79,16 +79,15 @@ namespace opengl {
         m_compiler->setMat4x4("projection", projection);
 
         glBindVertexArray(m_VAO);
-        glDrawElements(GL_LINES, m_indices.size() , GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, m_indices.size() , GL_UNSIGNED_INT, 0);
     }
 
     void Draw::drawVectorArray(glm::mat4 view, glm::mat4 projection) {
-        m_compiler->use();
+        m_vectorCompiler->use();
 
-        m_compiler->setMat4x4("model", modelmat);
-        m_compiler->setMat4x4("view", view);
-        m_compiler->setMat4x4("projection", projection);
-
+        m_vectorCompiler->setMat4x4("model", modelmat);
+        m_vectorCompiler->setMat4x4("view", view);
+        m_vectorCompiler->setMat4x4("projection", projection);
         glBindVertexArray(m_VAO_vectors);
         glDrawArrays(GL_LINES, 0 , m_vectores.size());
     }

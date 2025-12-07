@@ -1,8 +1,9 @@
 #include "../include/Entrada.h"
 
 namespace opengl {
-    float Entrada::evaluarFuncion(float x, float y, Funciones func) {
-        switch (func) {
+
+    float Entrada::evaluarFuncion(float x, float y) {
+        switch (m_funcion) {
             case TRIGONOMETRICA:
                 return sinf(x*y);
             case FUNCION_A:
@@ -30,7 +31,7 @@ namespace opengl {
             for (int j = 0; j <= pasos; ++j) {
                 float x = xMin + i * stepX;
                 float y = yMin + j * stepY;
-                float z = evaluarFuncion(x, y, m_funcion);
+                float z = evaluarFuncion(x, y);
 
                 // Coordenadas de textura normalizadas
                 float u = (float)i / pasos; 
@@ -78,7 +79,7 @@ namespace opengl {
             for (int j = 0; j <= pasos; ++j) {
                 float x = xMin + i * stepX;
                 float y = yMin + j * stepY;
-                float z = evaluarFuncion(x, y, m_funcion);
+                float z = evaluarFuncion(x, y);
 
                 glm::vec3 grad = gradiante(x, y, z);
                 grad *= 0.3f; // Escalar el vector para mejor visualización
@@ -93,13 +94,53 @@ namespace opengl {
                 vectores.push_back(endPoint.x);
                 vectores.push_back(endPoint.y);
                 vectores.push_back(endPoint.z);
+                
+                // ---- Crear cabeza de flecha ----
+                glm::vec3 dir = glm::normalize(endPoint - startPoint);
+
+                float headSize = 0.1f;
+
+                // Rotación simple en 2D del vector
+                glm::vec3 left(
+                    -dir.y,
+                    dir.x,
+                    dir.z
+                );
+
+                glm::vec3 right(
+                    dir.y,
+                    -dir.x,
+                    dir.z
+                );
+
+                left  = glm::normalize(left)  * headSize;
+                right = glm::normalize(right) * headSize;
+
+                glm::vec3 headL = endPoint - dir * 0.1f + left;
+                glm::vec3 headR = endPoint - dir * 0.1f + right;
+
+                // Línea izquierda de la cabeza
+                vectores.push_back(endPoint.x);
+                vectores.push_back(endPoint.y);
+                vectores.push_back(endPoint.z);
+                vectores.push_back(headL.x);
+                vectores.push_back(headL.y);
+                vectores.push_back(headL.z);
+
+                // Línea derecha de la cabeza
+                vectores.push_back(endPoint.x);
+                vectores.push_back(endPoint.y);
+                vectores.push_back(endPoint.z);
+                vectores.push_back(headR.x);
+                vectores.push_back(headR.y);
+                vectores.push_back(headR.z);
             }
         }
     }
 
     glm::vec3 Entrada::gradiante(float x, float y, float z, float h) {
-        float df_dx = (evaluarFuncion(x + h, y, m_funcion) - evaluarFuncion(x - h, y, m_funcion)) / (2 * h);
-        float df_dy = (evaluarFuncion(x, y + h, m_funcion) - evaluarFuncion(x, y - h, m_funcion)) / (2 * h);
+        float df_dx = (evaluarFuncion(x + h, y) - evaluarFuncion(x - h, y)) / (2 * h);
+        float df_dy = (evaluarFuncion(x, y + h) - evaluarFuncion(x, y - h)) / (2 * h);
         float df_dz = 1.0f; // Asumiendo que z = f(x,y), la derivada parcial con respecto a z es 1
 
         return glm::normalize(glm::vec3(df_dx, df_dy, -df_dz));

@@ -9,6 +9,7 @@
 #include "Compiler.h"
 #include "Draw.h"
 #include "Window.h"
+#include "Entrada.h"
 #include <vector>
 
 namespace opengl {
@@ -23,6 +24,8 @@ private:
   Window m_window;
   /* Compilador de los shaders */
   Compiler *m_compiler;
+  Compiler *m_vectorCompiler;
+  Entrada::Funciones m_funcion;
   /* Los objetos para dibujar */
   Draw *m_draw;
 
@@ -32,9 +35,11 @@ public:
    * Inicializamos la ventana similar al ejemplo de OpenGL
    * Para el resto, solo inicializamos los objetos predeterminados
    */
-  App() : m_window(800, 800, "OpenGL App") {
+  App(int n) : m_window(800, 800, "OpenGL App") {
       m_compiler = nullptr;
+      m_vectorCompiler = nullptr;
       m_draw = nullptr;
+      m_funcion = static_cast<Entrada::Funciones>(n);
   }
 
   /**

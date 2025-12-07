@@ -22,6 +22,8 @@ class Draw {
 private:
   Compiler* m_compiler;
 
+  Compiler* m_vectorCompiler;
+
   std::vector<GLfloat> m_vertices; // Utilizamos un vector para poder manejar
                                  // cualquier cantidad de vertices
   /* Los colores que usaremos para pintar nuestro objeto */
@@ -41,7 +43,7 @@ public:
   /**
    * @brief Constructor de la clase Draw
    */
-  Draw(Compiler* compiler);
+  Draw(Compiler* compiler, Compiler* vectorCompiler, Entrada::Funciones func);
 
   /**
    * @brief Destructor de la clase Draw
