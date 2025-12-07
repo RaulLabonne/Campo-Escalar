@@ -71,6 +71,8 @@ namespace opengl {
 
             void finish() { glDeleteProgram(shaderProgram); }
 
+            void setInt(const std::string &name, int value) const;
+
             void setMat4x4(const std::string &name, const glm::mat4 &matrix) const;
     };
 }

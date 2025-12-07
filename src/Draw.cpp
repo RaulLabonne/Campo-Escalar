@@ -7,7 +7,7 @@
 
 namespace opengl {
 
-    Draw::Draw(Compiler* compiler, Compiler* vectorCompiler, Entrada::Funciones func) : m_compiler(compiler), m_vectorCompiler(vectorCompiler) {
+    Draw::Draw(Compiler* compiler, Compiler* vectorCompiler, Entrada::Funciones func) : m_compiler(compiler), m_vectorCompiler(vectorCompiler), m_funcion(func) {
 
         /* m_vertices = {
             //   x      y      z      u     v
@@ -77,6 +77,7 @@ namespace opengl {
         m_compiler->setMat4x4("model", modelmat);
         m_compiler->setMat4x4("view", view);
         m_compiler->setMat4x4("projection", projection);
+        m_compiler->setInt("funcion", static_cast<int>(m_funcion));
 
         glBindVertexArray(m_VAO);
         glDrawElements(GL_TRIANGLES, m_indices.size() , GL_UNSIGNED_INT, 0);

@@ -66,8 +66,12 @@ namespace opengl {
         glDeleteShader(shader);
     }
 
+    void Compiler::setInt(const std::string &name, int value) const {
+        glUniform1i(glGetUniformLocation(shaderProgram, name.c_str()), value);
+    }
+
     void Compiler::setMat4x4(const std::string &name,  const glm::mat4 &value) const{
-    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
+        glUniformMatrix4fv(glGetUniformLocation(shaderProgram, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
     }
 }
 

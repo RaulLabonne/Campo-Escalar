@@ -39,6 +39,8 @@ private:
 
   glm::mat4 modelmat;
 
+  Entrada::Funciones m_funcion;
+
 public:
   /**
    * @brief Constructor de la clase Draw

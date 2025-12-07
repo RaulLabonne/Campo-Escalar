@@ -1,13 +1,20 @@
 #version 410 core
 in vec2 coordTex;
 out vec4 FragColor;
+uniform int funcion;
 
 float func(float x, float y){
 
+    switch(funcion){
+        case 0:
+            return sin(x*y);  // se queda 
+        case 1:
+            return 0.5 + 0.5 * sin( sqrt(x*x + y*y) ); // talvez
+        default:
+            return exp(-(x * x + y * y));
+    }
     //return exp( -x*x - y*y);
     //return x * x + 3 * x * y + 2 * (y * y);
-    return sin(x*y);  // se queda 
-    //return 0.5 + 0.5 * sin( sqrt(x*x + y*y) ); // talvez
     
 
 }
