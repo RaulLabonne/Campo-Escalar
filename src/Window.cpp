@@ -38,11 +38,8 @@ namespace opengl {
 
 
     void Window::initViewProyection(){
-        // Configurar matrices de transformación (model, view, projection)
-        //view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -3.0f));
-        //view = glm::lookAt(glm::vec3(0.0f,0.0f,1.0f), glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.0f,1.0f,0.0f));
 
-        view = glm::lookAt(glm::vec3(0,0,21), glm::vec3(0,0,0), glm::vec3(0,1,0));
+        view = glm::lookAt(glm::vec3(0,0,15), glm::vec3(0,0,0), glm::vec3(0,1,0));
 
 
         //projection = glm::perspective(glm::radians(45.0f), (float)m_width / (float)m_height, 0.1f, 100.0f);
@@ -54,21 +51,26 @@ namespace opengl {
     }
 
     void Window::updateViewProyection(float yaw, float pitch, float dist){
+        // Limitamos el pitch para evitar problemas de gimbal lock
         pitch = glm::clamp(pitch, -89.0f, 89.0f);
 
+        // Convertimos los ángulos de grados a radianes
         float ry = glm::radians(yaw);
         float rp = glm::radians(pitch);
 
+        // Calculamos la posición de la cámara en coordenadas esféricas
         float camX = dist * cos(rp) * sin(ry);
         float camY = dist * sin(rp);
         float camZ = dist * cos(rp) * cos(ry);
 
+        // Actualizamos la matriz de vista con la nueva posición de la cámara
         view = glm::lookAt(
             glm::vec3(camX, camY, camZ),
             glm::vec3(0, 0, 0),
             glm::vec3(0, 1, 0)
         );
 
+        // Mantenemos la matriz de proyección como perspectiva
         projection = glm::perspective(
             glm::radians(45.0f),
             (float)m_width / (float)m_height,
