@@ -45,6 +45,11 @@ namespace opengl {
         view = glm::lookAt(glm::vec3(0,0,21), glm::vec3(0,0,0), glm::vec3(0,1,0));
 
 
-        projection = glm::perspective(glm::radians(45.0f), (float)m_width / (float)m_height, 0.1f, 100.0f);
+        //projection = glm::perspective(glm::radians(45.0f), (float)m_width / (float)m_height, 0.1f, 100.0f);
+        projection = glm::ortho(
+            -8.0f, 8.0f,   // izquierda, derecha
+            -8.0f, 8.0f,   // abajo, arriba
+            0.1f, 100.0f   // near, far
+        );
     }
 }

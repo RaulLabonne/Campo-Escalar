@@ -75,7 +75,7 @@ public:
    * @brief Dibuja un objeto en OpenGL
    * @param count Número de vértices a dibujar
    */
-  void drawObject(glm::mat4 view, glm::mat4 projection);
+  void drawObject(glm::mat4 view, glm::mat4 projection, int renderMode);
 
   void drawVectorArray(glm::mat4 view, glm::mat4 projection);
 

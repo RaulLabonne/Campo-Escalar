@@ -73,6 +73,12 @@ namespace opengl {
                             int pasos,
                             std::vector<float>& vectores){
         vectores.clear();
+
+        float verticeMax[] = {0.0f, 0.0f};
+        float verticeMin[] = {999.0f, 999.0f};
+        float minZ = 999.0f;
+        float maxZ = -999.0f;
+
         float stepX = (xMax - xMin) / pasos;
         float stepY = (yMax - yMin) / pasos;
         for (int i = 0; i <= pasos; ++i) {
@@ -81,8 +87,19 @@ namespace opengl {
                 float y = yMin + j * stepY;
                 float z = evaluarFuncion(x, y);
 
+                if (z > maxZ) {
+                    maxZ = z;
+                    verticeMax[0] = x;
+                    verticeMax[1] = y;
+                }
+                if (z < minZ) {
+                    minZ = z;
+                    verticeMin[0] = x;
+                    verticeMin[1] = y;
+                }
+
                 glm::vec3 grad = gradiante(x, y, z);
-                grad *= 0.3f; // Escalar el vector para mejor visualización
+                grad *= 0.25f; // Escalar el vector para mejor visualización
 
                 glm::vec3 startPoint = glm::vec3(x, y, z);
                 glm::vec3 endPoint = startPoint + grad;
@@ -136,6 +153,9 @@ namespace opengl {
                 vectores.push_back(headR.z);
             }
         }
+
+        std::cout << "Vector max en (" << verticeMax[0] << ", " << verticeMax[1] << ") con z = " << maxZ << std::endl;
+        std::cout << "Vector min en (" << verticeMin[0] << ", " << verticeMin[1] << ") con z = " << minZ << std::endl;
     }
 
     glm::vec3 Entrada::gradiante(float x, float y, float z, float h) {

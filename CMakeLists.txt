@@ -27,6 +27,7 @@ add_executable(${PROJECT_NAME}
     ${PROJECT_SOURCE_DIR}/src/Window.cpp
     ${PROJECT_SOURCE_DIR}/src/Draw.cpp
     ${PROJECT_SOURCE_DIR}/src/Compiler.cpp
+    ${PROJECT_SOURCE_DIR}/src/Comando.cpp
     ${PROJECT_SOURCE_DIR}/src/Entrada.cpp)
 
 # Librerías

@@ -23,6 +23,8 @@ namespace opengl {
         }; */
 
         Entrada entrada(func);
+
+        std::cout << "\nFUNCION :" << static_cast<int>(func) << " Seleccionada" << std::endl;
         entrada.generarMalla(-8.0f, 8.0f,
                              -8.0f, 8.0f,
                              100,
@@ -31,7 +33,7 @@ namespace opengl {
 
         entrada.generarVectores(-8.0f, 8.0f,
                              -8.0f, 8.0f,
-                             40,
+                             30,
                              m_vectores);
     }
 
@@ -71,7 +73,7 @@ namespace opengl {
         glEnableVertexAttribArray(0);
     }
 
-    void Draw::drawObject(glm::mat4 view, glm::mat4 projection) {
+    void Draw::drawObject(glm::mat4 view, glm::mat4 projection, int renderMode) {
         m_compiler->use();
 
         m_compiler->setMat4x4("model", modelmat);
@@ -80,7 +82,15 @@ namespace opengl {
         m_compiler->setInt("funcion", static_cast<int>(m_funcion));
 
         glBindVertexArray(m_VAO);
-        glDrawElements(GL_TRIANGLES, m_indices.size() , GL_UNSIGNED_INT, 0);
+
+        switch(renderMode) {
+            case 0: // plano
+                glDrawElements(GL_TRIANGLES, m_indices.size() , GL_UNSIGNED_INT, 0);
+                break;
+            case 1: // malla
+                glDrawElements(GL_LINES, m_indices.size() , GL_UNSIGNED_INT, 0);
+                break;
+        }
     }
 
     void Draw::drawVectorArray(glm::mat4 view, glm::mat4 projection) {

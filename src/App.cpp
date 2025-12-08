@@ -32,6 +32,8 @@ namespace opengl
         m_draw->init();
         m_draw->initVectors();
 
+        int renderMode = 0; // 0: plano, 1: malla
+
         // Render loop
         while (!glfwWindowShouldClose(m_window.getWindow())) {
             if (glfwGetKey(m_window.getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -40,8 +42,12 @@ namespace opengl
             glClearColor(0.0,0.0,0.0,0.0);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            m_draw->drawObject(m_window.getView(), m_window.getProjection());
+            m_draw->drawObject(m_window.getView(), m_window.getProjection(), renderMode);
             m_draw->drawVectorArray(m_window.getView(), m_window.getProjection());
+
+            // Manejo de entradas
+            Comando::updateRender(glfwGetKey(m_window.getWindow(), GLFW_KEY_1), GLFW_KEY_1, &renderMode);
+            Comando::updateRender(glfwGetKey(m_window.getWindow(), GLFW_KEY_2), GLFW_KEY_2, &renderMode);
 
             glfwSwapBuffers(m_window.getWindow());
             glfwPollEvents();

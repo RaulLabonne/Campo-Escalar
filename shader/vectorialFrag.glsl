@@ -1,5 +1,5 @@
 #version 410 core
-in vec2 coordTex;
+in vec3 fragPos;
 out vec4 FragColor;
 
 
@@ -14,12 +14,25 @@ float func(float x, float y){
 }
 
 vec3 blancoCafe(float val) {
-    val = clamp(val, 0.0, 1.0) ;
+    /* float dx = 0.8;
+    float f = clamp(val, 0.0, 1.0);
+    float g = (6.0 - 2.0 * dx) * f + dx;
 
-    vec3 blanco = vec3(1.0);
-    vec3 cafe   = vec3(0.40, 0.26, 0.13);
+    // Pico que crece hacia la derecha (g grande = blanco)
+    float m = max(0.0, (6.0 - abs(g - 6.0)) / 6.0);
 
-    return mix(blanco, cafe, val);
+    return vec3(m); */
+    float dx = 0.8;
+    float f = clamp(val, 0.0, 1.0);
+    float g = (6.0 - 2.0 * dx) * f + dx;
+
+    // pico que crecía hacia la derecha
+    float m = max(0.0, (6.0 - abs(g - 6.0)) / 6.0);
+
+    // invertido: blanco → gris → negro
+    float inv = 1.0 - m;
+
+    return vec3(inv);
 }
 
 void main() {
@@ -30,13 +43,15 @@ void main() {
         //Definimos el dominio utilizando coordenadas de textura 
         //
         //1. (0,0) x (1,1) a (-1,-1) x (1,1) // Nuevo dominio (-8,8) x (-8,8)
-        float x = coordTex.x;
-        float y = coordTex.y;
-        float x1 = 16.0 * x - 8.0;
-        float y1 = 16.0 * y - 8.0;
+        float x = fragPos.x;
+        float y = fragPos.y;
+        /* float x1 = 16.0 * x - 8.0;
+        float y1 = 16.0 * y - 8.0; */
+        float x1 = x;
+        float y1 = y;
 
         //2. Evaluamos la función
-        float val = func(x1, y1) * 0.5;
+        float val = func(x1, y1);
 
         //3. Pintamos el valor Rojo cercano a 1, azul cercano a 0
         vec3 col = blancoCafe(val);

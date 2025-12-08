@@ -10,6 +10,7 @@
 #include "Draw.h"
 #include "Window.h"
 #include "Entrada.h"
+#include "Comando.h"
 #include <vector>
 
 namespace opengl {
@@ -26,6 +27,7 @@ private:
   Compiler *m_compiler;
   Compiler *m_vectorCompiler;
   Entrada::Funciones m_funcion;
+  Comando m_comando;
   /* Los objetos para dibujar */
   Draw *m_draw;
 
