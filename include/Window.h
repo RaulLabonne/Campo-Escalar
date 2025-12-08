@@ -61,9 +61,11 @@ namespace opengl {
              * @brief Devuelve el puntero a la ventana de GLFW.
              * @return Puntero a la ventana de GLFW.
              */
-            GLFWwindow* getWindow() const { return m_window; }
+            GLFWwindow* getWindow() const { return m_window; } 
 
             void initViewProyection();
+
+            void updateViewProyection(float yaw, float pitch, float dist);
 
             glm::mat4 getView() const { return view; }
             glm::mat4 getProjection() const { return projection; }

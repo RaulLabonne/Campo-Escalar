@@ -46,12 +46,11 @@ void main()
 
         //Definimos el dominio utilizando coordenadas de textura 
         //
-        //1. (0,0) x (1,1) a (-1,-1) x (1,1) // Nuevo dominio (-8,8) x (-8,8)
+        //1. (0,0) x (1,1) a (-1,-1) x (1,1) // Nuevo dominio (-5,5) x (-5,5)
         float x = coordTex.x;
         float y = coordTex.y;
-        float x1 = 16.0 * x - 8.0;
-        float y1 = 16.0 * y - 8.0;
-
+        float x1 = 10.0 * x - 5.0;
+        float y1 = 10.0 * y - 5.0;
         //2. Evaluamos la función
         float val = func(x1, y1);
 

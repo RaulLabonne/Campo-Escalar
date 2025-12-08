@@ -46,8 +46,16 @@ namespace opengl
             m_draw->drawVectorArray(m_window.getView(), m_window.getProjection());
 
             // Manejo de entradas
-            Comando::updateRender(glfwGetKey(m_window.getWindow(), GLFW_KEY_1), GLFW_KEY_1, &renderMode);
-            Comando::updateRender(glfwGetKey(m_window.getWindow(), GLFW_KEY_2), GLFW_KEY_2, &renderMode);
+            m_comando.updateRender(glfwGetKey(m_window.getWindow(), GLFW_KEY_1), GLFW_KEY_1, &renderMode);
+            m_comando.updateRender(glfwGetKey(m_window.getWindow(), GLFW_KEY_2), GLFW_KEY_2, &renderMode);
+
+            m_comando.updateRotation(glfwGetKey(m_window.getWindow(), GLFW_KEY_UP), GLFW_KEY_UP, &m_window);
+            m_comando.updateRotation(glfwGetKey(m_window.getWindow(), GLFW_KEY_DOWN), GLFW_KEY_DOWN, &m_window);
+            m_comando.updateRotation(glfwGetKey(m_window.getWindow(), GLFW_KEY_LEFT), GLFW_KEY_LEFT, &m_window);
+            m_comando.updateRotation(glfwGetKey(m_window.getWindow(), GLFW_KEY_RIGHT), GLFW_KEY_RIGHT, &m_window);
+            m_comando.updateRotation(glfwGetKey(m_window.getWindow(), GLFW_KEY_W), GLFW_KEY_W, &m_window);
+            m_comando.updateRotation(glfwGetKey(m_window.getWindow(), GLFW_KEY_S), GLFW_KEY_S, &m_window);
+            m_comando.updateRotation(glfwGetKey(m_window.getWindow(), GLFW_KEY_R), GLFW_KEY_R, &m_window);
 
             glfwSwapBuffers(m_window.getWindow());
             glfwPollEvents();

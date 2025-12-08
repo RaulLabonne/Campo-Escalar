@@ -25,14 +25,14 @@ namespace opengl {
         Entrada entrada(func);
 
         std::cout << "\nFUNCION :" << static_cast<int>(func) << " Seleccionada" << std::endl;
-        entrada.generarMalla(-8.0f, 8.0f,
-                             -8.0f, 8.0f,
+        entrada.generarMalla(-5.0f, 5.0f,
+                             -5.0f, 5.0f,
                              100,
                              m_vertices,
                              m_indices);
 
-        entrada.generarVectores(-8.0f, 8.0f,
-                             -8.0f, 8.0f,
+        entrada.generarVectores(-5.0f, 5.0f,
+                             -5.0f, 5.0f,
                              30,
                              m_vectores);
     }

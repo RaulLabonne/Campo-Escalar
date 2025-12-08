@@ -47,9 +47,34 @@ namespace opengl {
 
         //projection = glm::perspective(glm::radians(45.0f), (float)m_width / (float)m_height, 0.1f, 100.0f);
         projection = glm::ortho(
-            -8.0f, 8.0f,   // izquierda, derecha
-            -8.0f, 8.0f,   // abajo, arriba
+            -5.0f, 5.0f,   // izquierda, derecha
+            -5.0f, 5.0f,   // abajo, arriba
             0.1f, 100.0f   // near, far
         );
     }
-}
+
+    void Window::updateViewProyection(float yaw, float pitch, float dist){
+        pitch = glm::clamp(pitch, -89.0f, 89.0f);
+
+        float ry = glm::radians(yaw);
+        float rp = glm::radians(pitch);
+
+        float camX = dist * cos(rp) * sin(ry);
+        float camY = dist * sin(rp);
+        float camZ = dist * cos(rp) * cos(ry);
+
+        view = glm::lookAt(
+            glm::vec3(camX, camY, camZ),
+            glm::vec3(0, 0, 0),
+            glm::vec3(0, 1, 0)
+        );
+
+        projection = glm::perspective(
+            glm::radians(45.0f),
+            (float)m_width / (float)m_height,
+            0.1f,
+            100.0f
+        );
+    }
+
+} // namespace opengl
