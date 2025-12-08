@@ -89,8 +89,10 @@ namespace opengl {
     }
 
     void Draw::drawVectorArray(glm::mat4 view, glm::mat4 projection) {
+        // Usamos el shader para dibujar el arreglo de vectores
         m_vectorCompiler->use();
 
+        // Configuramos las matrices en el shader
         m_vectorCompiler->setMat4x4("model", modelmat);
         m_vectorCompiler->setMat4x4("view", view);
         m_vectorCompiler->setMat4x4("projection", projection);
