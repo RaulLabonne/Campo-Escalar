@@ -63,11 +63,29 @@ namespace opengl {
              */
             GLFWwindow* getWindow() const { return m_window; } 
 
+            /**
+             * @brief Inicializa las matrices de vista y proyección.
+             */
             void initViewProyection();
 
+            /**
+             * @brief Actualiza las matrices de vista y proyección basadas en los ángulos de yaw, pitch y la distancia.
+             * @param yaw Ángulo de rotación alrededor del eje Y.
+             * @param pitch Ángulo de rotación alrededor del eje X.
+             * @param dist Distancia desde la cámara al origen.
+             */
             void updateViewProyection(float yaw, float pitch, float dist);
 
+            /**
+             * @brief Devuelve la matriz de vista.
+             * @return Matriz de vista.
+             */
             glm::mat4 getView() const { return view; }
+            
+            /**
+             * @brief Devuelve la matriz de proyección.
+             * @return Matriz de proyección.
+             */
             glm::mat4 getProjection() const { return projection; }
     };
     

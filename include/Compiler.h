@@ -67,12 +67,16 @@ namespace opengl {
             /* Constructor */
             Compiler(const std::string& vertexPath, const std::string& fragmentPath);
 
+            /* Usa el programa de shaders */
             void use() { glUseProgram(shaderProgram); }
 
+            /* Elimina el programa de shaders */
             void finish() { glDeleteProgram(shaderProgram); }
 
+            /* Establece un valor entero en el shader */
             void setInt(const std::string &name, int value) const;
 
+            /* Establece una matriz 4x4 en el shader */
             void setMat4x4(const std::string &name, const glm::mat4 &matrix) const;
     };
 }

@@ -67,16 +67,29 @@ public:
    */
   GLuint getVBO() const { return m_VBO; }
 
+  /**
+   * @brief Inicializa los buffers de OpenGL
+   */
   void init();
 
+  /**
+   * @brief Inicializa los buffers para los vectores
+   */
   void initVectors();
 
   /**
-   * @brief Dibuja un objeto en OpenGL
-   * @param count Número de vértices a dibujar
+   * @brief Dibuja el objeto en OpenGL
+   * @param view Matriz de vista
+   * @param projection Matriz de proyección
+   * @param renderMode Modo de renderizado (0: plano, 1: malla)
    */
   void drawObject(glm::mat4 view, glm::mat4 projection, int renderMode);
 
+  /**
+   * @brief Dibuja un arreglo de vectores en OpenGL
+   * @param view Matriz de vista
+   * @param projection Matriz de proyección
+   */
   void drawVectorArray(glm::mat4 view, glm::mat4 projection);
 
   void stop();
