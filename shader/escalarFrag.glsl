@@ -11,12 +11,8 @@ float func(float x, float y){
         case 1:
             return 0.5 + 0.5 * sin( sqrt(x*x + y*y) ); // talvez
         default:
-            return exp(-(x * x + y * y));
+            return -x * x - y * y;
     }
-    //return exp( -x*x - y*y);
-    //return x * x + 3 * x * y + 2 * (y * y);
-    
-
 }
 
 vec3 arcoiris(float val){

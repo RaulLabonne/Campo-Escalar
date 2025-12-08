@@ -10,7 +10,7 @@ namespace opengl {
             case FUNCION_A:
                 return 0.5 + 0.5 * sin( sqrt(x*x + y*y) );
             case FUNCION_B:
-                return expf(-(x * x + y * y));
+                return -x * x - y * y;
             default:
                 return sinf(x*y);
         }

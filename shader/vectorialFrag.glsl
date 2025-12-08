@@ -1,16 +1,18 @@
 #version 410 core
 in vec3 fragPos;
 out vec4 FragColor;
-
+uniform int funcion;
 
 float func(float x, float y){
 
-    //return exp( -x*x - y*y);
-    //return x * x + 3 * x * y + 2 * (y * y);
-    return sin(x*y);  // se queda 
-    //return 0.5 + 0.5 * sin( sqrt(x*x + y*y) ); // talvez
-    
-
+    switch(funcion){
+        case 0:
+            return sin(x*y);  // se queda 
+        case 1:
+            return 0.5 + 0.5 * sin( sqrt(x*x + y*y) ); // talvez
+        default:
+            return -x * x - y * y;
+    }
 }
 
 vec3 blancoCafe(float val) {

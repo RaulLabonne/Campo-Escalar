@@ -27,7 +27,7 @@ Escoja la funcion a visualizar:
 
 0: TRIGONOMETRICA (sin(xy))
 1: FUNCION_A (0.5 + 0.5 * sin(sqrt(x^2 + y^2)))
-2: FUNCION_B (exp(-(x^2 + y^2)))
+2: FUNCION_B (-x * x - y * y)
 
 ```
 

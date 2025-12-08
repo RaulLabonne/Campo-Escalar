@@ -96,6 +96,10 @@ namespace opengl {
         m_vectorCompiler->setMat4x4("model", modelmat);
         m_vectorCompiler->setMat4x4("view", view);
         m_vectorCompiler->setMat4x4("projection", projection);
+
+        // Configuramos la textura a usar en el shader
+        m_vectorCompiler->setInt("funcion", static_cast<int>(m_funcion));
+        
         glBindVertexArray(m_VAO_vectors);
         glDrawArrays(GL_LINES, 0 , m_vectores.size());
     }
