@@ -98,7 +98,7 @@ namespace opengl {
                     verticeMin[1] = y;
                 }
 
-                glm::vec3 grad = gradiante(x, y, z);
+                glm::vec3 grad = gradiante(x, y);
                 grad *= 0.25f; // Escalar el vector para mejor visualización
 
                 glm::vec3 startPoint = glm::vec3(x, y, z);
@@ -158,7 +158,7 @@ namespace opengl {
         std::cout << "Vector min en (" << verticeMin[0] << ", " << verticeMin[1] << ") con z = " << minZ << std::endl;
     }
 
-    glm::vec3 Entrada::gradiante(float x, float y, float z, float h) {
+    glm::vec3 Entrada::gradiante(float x, float y, float h) {
         float df_dx = (evaluarFuncion(x + h, y) - evaluarFuncion(x - h, y)) / (2 * h);
         float df_dy = (evaluarFuncion(x, y + h) - evaluarFuncion(x, y - h)) / (2 * h);
         float df_dz = 1.0f; // Asumiendo que z = f(x,y), la derivada parcial con respecto a z es 1

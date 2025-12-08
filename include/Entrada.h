@@ -79,7 +79,7 @@ namespace opengl {
          * @param h Paso pequeño para la aproximación numérica
          * @return Vector gradiente en (x, y)
         */
-        glm::vec3 gradiante(float x, float y, float z, float h = 0.01f);
+        glm::vec3 gradiante(float x, float y, float h = 0.01f);
 
         private:
             /* La funcion escogida */
