@@ -9,28 +9,19 @@ namespace opengl {
 
     Draw::Draw(Compiler* compiler, Compiler* vectorCompiler, Entrada::Funciones func) : m_compiler(compiler), m_vectorCompiler(vectorCompiler), m_funcion(func) {
 
-        /* m_vertices = {
-            //   x      y      z      u     v
-            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,   // v0
-            0.5f, -0.5f, 0.0f, 1.0f, 0.0f,   // v1
-            0.5f,  0.5f, 0.0f, 1.0f, 1.0f,   // v2
-            -0.5f,  0.5f, 0.0f, 0.0f, 1.0f    // v3
-        };
-
-        m_indices = {
-            0, 1, 2,
-            2, 3, 0
-        }; */
-
+        // Creamos la entrada para generar la malla
         Entrada entrada(func);
 
         std::cout << "\nFUNCION :" << static_cast<int>(func) << " Seleccionada" << std::endl;
+
+        // Generamos la malla de la función
         entrada.generarMalla(-5.0f, 5.0f,
                              -5.0f, 5.0f,
                              100,
                              m_vertices,
                              m_indices);
 
+        // Generamos el campo vectorial de la función
         entrada.generarVectores(-5.0f, 5.0f,
                              -5.0f, 5.0f,
                              30,
@@ -39,7 +30,7 @@ namespace opengl {
 
     void Draw::init() {
         modelmat = glm::mat4(1.0f);
-            // Crear y enlazar el VAO y VBO
+        // Crear y enlazar el VAO y VBO
         
         glGenVertexArrays(1, &m_VAO);
         glGenBuffers(1, &m_VBO);
@@ -74,11 +65,15 @@ namespace opengl {
     }
 
     void Draw::drawObject(glm::mat4 view, glm::mat4 projection, int renderMode) {
+        // Usamos el shader para dibujar el objeto
         m_compiler->use();
 
+        // Configuramos las matrices en el shader
         m_compiler->setMat4x4("model", modelmat);
         m_compiler->setMat4x4("view", view);
         m_compiler->setMat4x4("projection", projection);
+
+        // Configuramos la textura a usar en el shader
         m_compiler->setInt("funcion", static_cast<int>(m_funcion));
 
         glBindVertexArray(m_VAO);

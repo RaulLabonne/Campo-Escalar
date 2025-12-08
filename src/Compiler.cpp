@@ -67,10 +67,12 @@ namespace opengl {
     }
 
     void Compiler::setInt(const std::string &name, int value) const {
+        // Establece un valor entero en el shader de acuedo a su nombre
         glUniform1i(glGetUniformLocation(shaderProgram, name.c_str()), value);
     }
 
     void Compiler::setMat4x4(const std::string &name,  const glm::mat4 &value) const{
+        // Establece una matriz 4x4 en el shader de acuedo a su nombre
         glUniformMatrix4fv(glGetUniformLocation(shaderProgram, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
     }
 }
